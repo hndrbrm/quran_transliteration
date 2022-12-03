@@ -19,7 +19,8 @@ abstract class Transliteration {
 ///
 /// * Extended Buckwalter <https://corpus.quran.com/java/buckwalter.jsp>
 class ExtendedBuckwalterTransliteration implements Transliteration {
-  static const Map<String, String> _table = {
+  static const Map<String, String> _forwardTable = {
+    ' ': ' ',
     "'": kArabicLetterHamza,
     '>': kArabicLetterAlefWithHamzaAbove,
     '&': kArabicLetterWawWithHamzaAbove,
@@ -82,9 +83,72 @@ class ExtendedBuckwalterTransliteration implements Transliteration {
     ']': kArabicSmallLowMeem,
   };
 
-  static Map<String, String> get _forwardTable => _table;
-
-  static Map<String, String> get _backwardTable => _table.map((k, v) => MapEntry(v, k));
+  static const Map<String, String> _backwardTable = {
+    ' ': ' ',
+    kArabicLetterHamza: "'",
+    kArabicLetterAlefWithHamzaAbove: '>',
+    kArabicLetterWawWithHamzaAbove: '&',
+    kArabicLetterAlefWithHamzaBelow: '<',
+    kArabicLetterYehWithHamzaAbove: '}',
+    kArabicLetterAlef: 'A',
+    kArabicLetterBeh: 'b',
+    kArabicLetterTehMarbuta: 'p',
+    kArabicLetterTeh: 't',
+    kArabicLetterTheh: 'v',
+    kArabicLetterJeem: 'j',
+    kArabicLetterHah: 'H',
+    kArabicLetterKhah: 'x',
+    kArabicLetterDal: 'd',
+    kArabicLetterThal: '*',
+    kArabicLetterReh: 'r',
+    kArabicLetterZain: 'z',
+    kArabicLetterSeen: 's',
+    kArabicLetterSheen: '\$',
+    kArabicLetterSad: 'S',
+    kArabicLetterDad: 'D',
+    kArabicLetterTah: 'T',
+    kArabicLetterZah: 'Z',
+    kArabicLetterAin: 'E',
+    kArabicLetterGhain: 'g',
+    kArabicTatweel: '_',
+    kArabicLetterFeh: 'f',
+    kArabicLetterQaf: 'q',
+    kArabicLetterKaf: 'k',
+    kArabicLetterKeheh: 'k',
+    kArabicLetterLam: 'l',
+    kArabicLetterMeem: 'm',
+    kArabicLetterNoon: 'n',
+    kArabicLetterHeh: 'h',
+    kArabicLetterWaw: 'w',
+    kArabicLetterAlefMaksura: 'Y',
+    kArabicLetterYeh: 'y',
+    kArabicLetterFarsiYeh: 'y',
+    kArabicFathatan: 'F',
+    kArabicDammatan: 'N',
+    kArabicKasratan: 'K',
+    kArabicFatha: 'a',
+    kArabicDamma: 'u',
+    kArabicKasra: 'i',
+    kArabicShadda: '~',
+    kArabicSukun: 'o',
+    kArabicMaddahAbove: '^',
+    kArabicSmallHighMadda: '^',
+    kArabicHamzaAbove: '#',
+    kArabicLetterSuperscriptAlef: '`',
+    kArabicLetterAlefWasla: '{',
+    kArabicSmallHighSeen: ':',
+    kArabicSmallHighRoundedZero: '@',
+    kArabicSmallHighUprightRectangularZero: '"',
+    kArabicSmallHighMeemIsolatedForm: '[',
+    kArabicSmallLowSeen: ';',
+    kArabicSmallWaw: ',',
+    kArabicSmallYeh: '.',
+    kArabicSmallHighNoon: '!',
+    kArabicEmptyCentreLowStop: '-',
+    kArabicEmptyCentreHighStop: '+',
+    kArabicRoundedHighStopWithFilledCentre: '%',
+    kArabicSmallLowMeem: ']',
+  };
 
   static String _convert(String value, Map<String, String> table) {
     final StringBuffer buffer = StringBuffer();
