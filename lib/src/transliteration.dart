@@ -153,6 +153,13 @@ class ExtendedBuckwalterTransliteration implements Transliteration {
   static String _convert(String value, Map<String, String> table) {
     final StringBuffer buffer = StringBuffer();
     for (int i = 0; i < value.length; i++) {
+      if (table[value[i]] == null) {
+        assert((){
+          print('Character at index $i, \\u{0${value[i].runes.first.toRadixString(16)}} is not defined');
+          return true;
+        }());
+        continue;
+      }
       buffer.write(table[value[i]]!);
     }
     return buffer.toString();
